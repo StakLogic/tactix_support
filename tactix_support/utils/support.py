@@ -93,7 +93,7 @@ def ensure_portal_user(settings, headers, user, user_fullname, department, is_de
 			req_type="GET",
 		)
 
-		if user_data.get("data"):
+		if user_data.get("message"):
 			return
 
 	except Exception:
