@@ -65,7 +65,7 @@
       xhr.setRequestHeader("X-Frappe-CSRF-Token", frappe.csrf_token);
       let form_data = new FormData();
       form_data.append("file", file, `screen-rec-${Date.now()}.mp4`);
-      const isPrivate = frappe.boot.tactix_file_type !== void 0 ? frappe.boot.tactix_file_type : frappe.boot.genie_file_type || 0;
+      const isPrivate = frappe.boot.tactix_file_type !== void 0 ? frappe.boot.tactix_file_type : 0;
       form_data.append("is_private", isPrivate);
       form_data.append("folder", "Home/Tactix");
       xhr.send(form_data);
@@ -84,8 +84,7 @@
   tactix_support.blobURL = tactix.blobURL;
   tactix.SupportTicket = class SupportTicket {
     constructor() {
-      const isEnabled = frappe.boot.tactix_support_enabled !== void 0 ? frappe.boot.tactix_support_enabled : frappe.boot.genie_support_enabled;
-      if (!isEnabled) {
+      if (!frappe.boot.tactix_support_enabled) {
         frappe.msgprint(__("Ticket raising is not enabled for this site."));
         return;
       }
@@ -321,7 +320,7 @@
       tactix_support.chunks = [];
       tactix_support.blob = null;
       tactix_support.blobURL = null;
-      const maxMb = frappe.boot.tactix_max_file_size || frappe.boot.genie_max_file_size || 50;
+      const maxMb = frappe.boot.tactix_max_file_size || 50;
       this.maxFileSizeInBytes = maxMb * 1024 * 1024;
       this.sizeWarning = maxMb / 4 * 1024 * 1024;
       this.nextWarningSize = this.sizeWarning;
@@ -443,4 +442,4 @@
   };
   tactix_support.OpenPortal = tactix.OpenPortal;
 })();
-//# sourceMappingURL=tactix_support.bundle.LV5F7V2H.js.map
+//# sourceMappingURL=tactix_support.bundle.FOVWL2DD.js.map

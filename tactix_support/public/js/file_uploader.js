@@ -69,7 +69,7 @@ tactix.UploadFile = function (file) {
 
         let form_data = new FormData();
         form_data.append('file', file, `screen-rec-${Date.now()}.mp4`);
-        const isPrivate = (frappe.boot.tactix_file_type !== undefined) ? frappe.boot.tactix_file_type : (frappe.boot.genie_file_type || 0);
+        const isPrivate = (frappe.boot.tactix_file_type !== undefined) ? frappe.boot.tactix_file_type : 0;
         form_data.append('is_private', isPrivate);
         form_data.append('folder', 'Home/Tactix');
 

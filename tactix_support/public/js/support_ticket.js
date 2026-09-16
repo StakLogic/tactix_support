@@ -15,10 +15,7 @@ tactix_support.blobURL = tactix.blobURL;
 
 tactix.SupportTicket = class SupportTicket {
 	constructor() {
-		const isEnabled = frappe.boot.tactix_support_enabled !== undefined ?
-			frappe.boot.tactix_support_enabled : frappe.boot.genie_support_enabled;
-
-		if (!isEnabled) {
+		if (!frappe.boot.tactix_support_enabled) {
 			frappe.msgprint(__("Ticket raising is not enabled for this site."));
 			return;
 		}
@@ -270,7 +267,7 @@ tactix.SupportTicket = class SupportTicket {
 		tactix_support.blob = null;
 		tactix_support.blobURL = null;
 
-		const maxMb = frappe.boot.tactix_max_file_size || frappe.boot.genie_max_file_size || 50;
+		const maxMb = frappe.boot.tactix_max_file_size || 50;
 		this.maxFileSizeInBytes = maxMb * 1024 * 1024;
 		this.sizeWarning = (maxMb / 4) * 1024 * 1024;
 		this.nextWarningSize = this.sizeWarning;

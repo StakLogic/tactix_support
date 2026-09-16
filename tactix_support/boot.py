@@ -9,7 +9,3 @@ def set_bootinfo(bootinfo):
 	bootinfo["tactix_support_enabled"] = tactix_settings.enable_ticket_raising
 	bootinfo["tactix_max_file_size"] = tactix_settings.max_recording_size
 	bootinfo["tactix_file_type"] = 1 if tactix_settings.save_recording == "Private" else 0
-	# Set backward compatibility keys
-	bootinfo["genie_support_enabled"] = tactix_settings.enable_ticket_raising
-	bootinfo["genie_max_file_size"] = tactix_settings.max_recording_size
-	bootinfo["genie_file_type"] = 1 if tactix_settings.save_recording == "Private" else 0
