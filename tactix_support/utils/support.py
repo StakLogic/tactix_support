@@ -25,10 +25,7 @@ def create_ticket(
 		"Authorization": f"token {settings.get_password('support_api_token')}",
 	}
 
-	roles = frappe.get_roles(user)
-	is_department_head = "HOD" in roles or "Department Head" in roles
-
-	ensure_portal_user(settings, headers, user, user_fullname, department, is_department_head)
+	ensure_portal_user(settings, headers, user, user_fullname)
 
 	attachments = []
 
@@ -66,7 +63,6 @@ def create_ticket(
 				"raised_by_user": user,
 				"user_fullname": user_fullname,
 				"customer": settings.hd_customer,
-				"department": department,
 				"ticket_type": "Support",
 				**generate_ticket_details(settings),
 			},
@@ -77,7 +73,7 @@ def create_ticket(
 	return response.get("message")
 
 
-def ensure_portal_user(settings, headers, user, user_fullname, department, is_department_head):
+def ensure_portal_user(settings, headers, user, user_fullname):
 	"""Ensure portal user exists in Tactix"""
 
 	if not user:
@@ -107,8 +103,6 @@ def ensure_portal_user(settings, headers, user, user_fullname, department, is_de
 			"first_name": user_fullname or user.split("@")[0],
 			"enabled": 1,
 			"customer": settings.hd_customer,
-			"department": department,
-			"is_department_head": is_department_head,
 			"roles": [
 				{"role": "Tactix Ticket Raiser"}
 			],
