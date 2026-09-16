@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include tactix_support *.css
+recursive-include tactix_support *.csv
+recursive-include tactix_support *.html
+recursive-include tactix_support *.ico
+recursive-include tactix_support *.js
+recursive-include tactix_support *.json
+recursive-include tactix_support *.md
+recursive-include tactix_support *.png
+recursive-include tactix_support *.py
+recursive-include tactix_support *.svg
+recursive-include tactix_support *.txt
+recursive-exclude tactix_support *.pyc

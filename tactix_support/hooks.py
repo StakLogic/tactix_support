@@ -26,7 +26,7 @@ app_license = "mit"
 
 # include js, css files in header of desk.html
 # app_include_css = "/assets/tactix_support/css/tactix_support.css"
-# app_include_js = "/assets/tactix_support/js/tactix_support.js"
+app_include_js = ["tactix_support.bundle.js"]
 
 # include js, css files in header of web template
 # web_include_css = "/assets/tactix_support/css/tactix_support.css"
@@ -43,7 +43,7 @@ app_license = "mit"
 # page_js = {"page" : "public/js/file.js"}
 
 # include js in doctype views
-# doctype_js = {"doctype" : "public/js/doctype.js"}
+doctype_js = {"User": "public/js/impersonation.js"}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
@@ -64,6 +64,9 @@ app_license = "mit"
 # 	"Role": "home_page"
 # }
 
+# Boot Info
+extend_bootinfo = "tactix_support.boot.set_bootinfo"
+
 # Generators
 # ----------
 
@@ -83,13 +86,17 @@ app_license = "mit"
 # ------------
 
 # before_install = "tactix_support.install.before_install"
-# after_install = "tactix_support.install.after_install"
+after_install = "tactix_support.setup.install.after_install"
 
 # Uninstallation
 # ------------
 
 # before_uninstall = "tactix_support.uninstall.before_uninstall"
 # after_uninstall = "tactix_support.uninstall.after_uninstall"
+
+# Migration
+# ------------
+after_migrate = "tactix_support.setup.migrate.after_migrate"
 
 # Integration Setup
 # ------------------
