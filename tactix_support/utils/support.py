@@ -19,7 +19,7 @@ def create_ticket(
 	file_attachment=None,
 	department=None,
 ):
-	"""Create ticket in Opero Support Portal"""
+	"""Create ticket in Tactix Support Portal"""
 	settings = frappe.get_cached_doc("Tactix Settings")
 	headers = {
 		"Authorization": f"token {settings.get_password('support_api_token')}",
@@ -55,7 +55,7 @@ def create_ticket(
 		attachments.append(file_data)
 
 	response = make_request(
-		url=f"{settings.support_url.rstrip('/')}/api/method/opero.api.ticket.create_opero_ticket",
+		url=f"{settings.support_url.rstrip('/')}/api/method/tactix.api.ticket.create_tactix_ticket",
 		headers=headers,
 		payload={
 			"doc": {
@@ -78,14 +78,14 @@ def create_ticket(
 
 
 def ensure_portal_user(settings, headers, user, user_fullname, department, is_department_head):
-	"""Ensure portal user exists in Opero"""
+	"""Ensure portal user exists in Tactix"""
 
 	if not user:
 		return
 
 	try:
 		user_data = make_request(
-			url=f"{settings.support_url.rstrip('/')}/api/method/opero.api.ticket.check_portal_user",
+			url=f"{settings.support_url.rstrip('/')}/api/method/tactix.api.ticket.check_portal_user",
 			headers=headers,
 			payload={
 				"email": user
@@ -100,7 +100,7 @@ def ensure_portal_user(settings, headers, user, user_fullname, department, is_de
 		pass
 
 	make_request(
-		url=f"{settings.support_url.rstrip('/')}/api/method/opero.api.ticket.create_portal_user",
+		url=f"{settings.support_url.rstrip('/')}/api/method/tactix.api.ticket.create_portal_user",
 		headers=headers,
 		payload={
 			"email": user,
@@ -110,7 +110,7 @@ def ensure_portal_user(settings, headers, user, user_fullname, department, is_de
 			"department": department,
 			"is_department_head": is_department_head,
 			"roles": [
-				{"role": "Opero Ticket Raiser"}
+				{"role": "Tactix Ticket Raiser"}
 			],
 		},
 		req_type="POST",
@@ -160,7 +160,7 @@ def get_portal_url(user=frappe.session.user):
 
 	try:
 		return {
-			"url": f"{support_url}/opero/opero/account/login"
+			"url": f"{support_url}/tactix/tactix/account/login"
 		}
 
 	except Exception:

@@ -25,5 +25,5 @@ class TactixSettings(Document):
 			payload={}
 		).get("message")
 
-		if not support_portal or not support_portal.get("opero"):
-			frappe.throw(_("{0} does not have Opero app installed.").format(self.support_url))
+		if not support_portal or not support_portal.get("tactix"):
+			frappe.throw(_("{0} does not have Tactix app installed.").format(self.support_url))
