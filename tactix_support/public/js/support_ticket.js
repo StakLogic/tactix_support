@@ -73,12 +73,6 @@ tactix.SupportTicket = class SupportTicket {
 					fieldtype: "Column Break"
 				},
 				{
-					fieldname: "department",
-					label: __("Department"),
-					fieldtype: "Link",
-					options: "Department",
-				},
-				{
 					fieldtype: "Section Break",
 					label: __("Description")
 				},
@@ -184,16 +178,12 @@ tactix.SupportTicket = class SupportTicket {
 		this.dialog.$wrapper.find(".modal-dialog").css("z-index", 1);
 		this.dialog.get_minimize_btn().addClass("pr-3");
 
-		const r = await frappe.db.get_value("Employee", { user_id: frappe.session.user }, "department");
-		if (r && r.message && r.message.department) {
-			this.dialog.set_value("department", r.message.department);
-		}
 	}
 
 	setIndicator(indicator) {
 		this.dialog.header
 			.find(".indicator")
-			.css({ width: "1rem", height: '1rem'})
+			.css({ width: "1rem", height: '1rem' })
 			.removeClass()
 			.addClass("indicator " + (indicator || "hidden"));
 	}
@@ -232,7 +222,6 @@ tactix.SupportTicket = class SupportTicket {
 				"user_fullname": values.ticket_user,
 				"description": values.ticket_description,
 				"file_attachment": values.file_attachment,
-				"department": values.department,
 				"screen_recording": screen_recording
 			},
 			freeze: true,
